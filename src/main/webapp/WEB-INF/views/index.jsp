@@ -56,7 +56,7 @@
 <div class="container">
     <div class="topMenu">
         <div id="logo"><img src="logo.png"></div>
-        <div id="searchBar">검색창</div>
+        <div id="searchBar">searchBar</div>
         <div id="logInfo">로그인정보</div>
     </div>
     <div class="menuBar">메뉴바</div>
