@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
     <title>Document</title>
     <link href="/css/style.css" rel="stylesheet">
+<%--    <script src="/webjars/jquery/3.6.2/jquery.min.js"></script>--%>
 
 </head>
 
