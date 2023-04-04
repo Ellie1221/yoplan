@@ -27,7 +27,7 @@
             <button type="button" id="searchButton"><img src="/images/loupe.png" id="loupe"></button>
         </div>
         <div id="logInfo">
-            <a href="#">로그인</a>
+            <a href="/loginForm">로그인</a>
             &nbsp;&nbsp;
             <a href="#">회원가입</a>
         </div>
