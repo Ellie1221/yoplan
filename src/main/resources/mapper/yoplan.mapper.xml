@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scheduler.yoplan.mapper.MemberMapper">
+    <!--로그인 확인-->
+    <select id="loginCheck" resultType="int">
+        SELECT COUNT(*) FROM member WHERE id=#{id } AND pw=#{pw }
+    </select>
+
+    <!--로그인 정보 받아오기-->
+    <select id="loginInfo" resultType="com.scheduler.yoplan.VO.MemberVO">
+        SELECT * FROM member WHERE id=#{id }
+    </select>
+
+</mapper>
+

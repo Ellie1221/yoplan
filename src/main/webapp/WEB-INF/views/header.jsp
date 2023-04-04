@@ -12,10 +12,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Document</title>
     <link href="/css/style.css" rel="stylesheet">
-<%--    <script src="/webjars/jquery/3.6.2/jquery.min.js"></script>--%>
+    <%--    <script src="/webjars/jquery/3.6.2/jquery.min.js"></script>--%>
 
 </head>
 
@@ -28,9 +28,18 @@
             <button type="button" id="searchButton"><img src="/images/loupe.png" id="loupe"></button>
         </div>
         <div id="logInfo">
-            <a href="/loginForm">로그인</a>
-            &nbsp;&nbsp;
-            <a href="#">회원가입</a>
+
+            <c:if test="${logId==null}">
+                <a href="/loginForm">로그인</a>
+                &nbsp;&nbsp;
+                <a href="#">회원가입</a>
+            </c:if>
+            <c:if test="${logId!=null}">
+                <a href="#">${logId}&nbsp;님 </a>
+                &nbsp;&nbsp;
+                <a href="/logout">로그아웃</a>
+            </c:if>
+
         </div>
     </div>
     <div class="menuBar">
@@ -41,6 +50,13 @@
     </div>
 
 </div>
+<script>
+    let loginMsg="${loginMsg}";
+    if(loginMsg!=""){
+        alert(loginMsg);
+        location.href="/";
+    }
+</script>
 </body>
 
 </html>
