@@ -18,9 +18,22 @@ public class MemberService implements IMemberService {
     public int loginCheck(String id, String pw) {
            return mMapper.loginCheck(id, pw);
     }
+
     @Override
     //세션에 로그인 정보 저장
     public MemberVO loginInfo(String id) {
         return mMapper.loginInfo(id);
+    }
+
+    @Override
+    //아이디 중복체크
+    public int idCheck(String id) {
+        return mMapper.idCheck(id);
+    }
+
+    @Override
+    //닉네임 중복체크
+    public int nicknameCheck(String nickname) {
+        return mMapper.nicknameCheck(nickname);
     }
 }

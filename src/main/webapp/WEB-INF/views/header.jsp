@@ -32,12 +32,12 @@
             <c:if test="${logId==null}">
                 <a href="/loginForm">로그인</a>
                 &nbsp;&nbsp;
-                <a href="#">회원가입</a>
+                <a href="/newMember">회원가입</a>
             </c:if>
             <c:if test="${logId!=null}">
                 <a href="#">${logId}&nbsp;님 </a>
                 &nbsp;&nbsp;
-                <a href="/logout">로그아웃</a>
+                <a href="/member">로그아웃</a>
             </c:if>
 
         </div>

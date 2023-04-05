@@ -12,113 +12,10 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
     <title>Yo! Plan</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .content{
-            width: 1000px;
-            margin: 0 auto;
-        }
-
-        .banner {
-            width: 10000px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            position: relative;
-        }
-
-        .banner li {
-            float: left;
-        }
-
-        .banner img {
-            width: 1000px;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .banner-wrapper {
-            margin-top: 10px;
-            width: 1000px;
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .banner-nav {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-        }
-
-        .prev, .next {
-            position: absolute;
-            cursor: pointer;
-            opacity: 0.7;
-            width: 50px;
-            height: 50px;
-        }
-
-        .prev {
-            left: 0;
-            transform: translateY(-50%);
-        }
-
-        .next {
-            right: 0;
-            transform: translateY(-50%);
-        }
-
-        h2{
-            margin-top: 20px;
-        }
-
-        .best-box-container {
-            display: flex;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .best-box {
-            flex-basis: 24%;
-            overflow: hidden;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border-radius: 15px;
-            box-shadow: 2px 2px 5px #dad7d7;
-        }
-
-        .best-box:last-child {
-            margin-right: 0;
-        }
-
-        .best-box img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .best-box h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .best-box p {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .best_text{
-            padding: 10px;
-        }
-
 
     </style>
 </head>
@@ -143,7 +40,7 @@
                 <img src="/images/slidetest1.jpg" alt="여행 이미지">
                 <div class="best_text">
                     <h3>여행 제목</h3>
-                    <p>여행 설명 여행 설명여행 설명여행 설명여행 설명여행 설명여행 설명</p
+                    <p>여행 설명 여행 설명여행 설명여행 설명여행 설명여행 설명여행 설명</p>
                     <p>chaeng 님의 여행</p>
 
                 </div>
@@ -208,11 +105,9 @@
         </div>
     </div>
 
-
     <div class="footer">
         footer
     </div>
-
 <script>
     $(document).ready(function() {
         var banner = $('.banner');
