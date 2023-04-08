@@ -67,55 +67,12 @@ a{
     border-radius: 3px;
 }
 .content{
-    min-height: 500px;
+    min-height: 600px;
     width: 1000px;
     margin: 0 auto;
 }
 .footer{
     height: 40px;
-}
-.loginBox{
-    width: 350px;
-    height: 500px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px gray;
-    margin: 0 auto;
-    position: relative;
-    top : 70px;
-}
-#loginLine{
-    border-top: thin solid #c0c0c0;
-    width: 88%;
-    margin-top: 10px;
-}
-.loginBox img{
-    position: relative;
-    margin-top: 30px;
-    left: 35px;
-}
-.loginBox input{
-    width: 280px;
-    height: 30px;
-}
-.loginBox form{
-    margin-left: 35px;
-}
-.loginBox input[type='text'], input[type='password']{
-    padding: 10px;
-}
-.loginBox input[type='button']{
-    color: skyblue;
-    border-radius: 7px;
-    border: 1px solid skyblue;
-    background: rgba(0,0,0,0);
-    margin: 5px 0;
-}
-.loginBox input[type='submit']{
-    background-color: skyblue;
-    border-radius: 7px;
-    border: none;
-    color: white;
-    margin: 5px 0;
 }
 
 /*홈화면 CSS*/

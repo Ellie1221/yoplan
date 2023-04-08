@@ -16,4 +16,7 @@ public interface MemberMapper {
 
     //닉네임 중복체크
     public int nicknameCheck(String nickname);
+
+    //회원가입
+    public int rigiMember(MemberVO member);
 }

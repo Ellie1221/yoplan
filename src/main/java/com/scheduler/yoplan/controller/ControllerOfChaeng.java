@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 @Slf4j
-public class RestConOfChaeng {
+public class ControllerOfChaeng {
 
     @Autowired
     IMemberService mService;
@@ -74,22 +79,68 @@ public class RestConOfChaeng {
 
     //회원가입 폼으로 이동
     @RequestMapping(value = "/newMember", method = RequestMethod.GET)
-    public String regiMember(){
+    public String regiMember() {
         return "regiMemForm";
     }
 
     //아이디 중복체크
     @RequestMapping(value = "/identification/id/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public int idCheck(@PathVariable String id){
-        int result = mService.idCheck(id);
-        return result;
+    public int idCheck(@PathVariable String id) {
+        return mService.idCheck(id);
     }
+
     //닉네임 중복체크
     @RequestMapping(value = "/nickname/nickname/{nickname}", method = RequestMethod.GET)
     @ResponseBody
-    public int nicknameCheck(@PathVariable String nickname){
-        int result = mService.nicknameCheck(nickname);
-        return result;
+    public int nicknameCheck(@PathVariable String nickname) {
+        return mService.nicknameCheck(nickname);
     }
+
+    //회원가입
+    @RequestMapping(value = "/newMember", method = RequestMethod.POST)
+    public String regiMember(MemberVO member, MultipartFile file, HttpServletRequest request, HttpSession session) {
+        member.setCategory(" ");
+        member.setStatus("on");
+        member.setReason(" ");
+        log.info(member.toString());
+        if(member.getProfile()==null){
+            member.setProfile("basicProfile.png");
+            mService.regiMember(member);
+        }else{
+            // 사진을 저장하기
+            String path = System.getProperty("user.dir") + "/src/main/resources/static/images";
+            log.info("path : " + path);
+            File saveFile = new File(path, member.getProfile());
+            log.info("saveFile : " + saveFile.toString());
+            log.info("1-----");
+            log.info(file.getName());
+
+            try {
+                log.info("2-----");
+                file.transferTo(saveFile);
+                log.info("3-----");
+            } catch (IllegalStateException | IOException e) {
+                e.printStackTrace();
+            }
+            log.info("4-----");
+            member.setProfile(file.getOriginalFilename());
+            log.info("5-----");
+            mService.regiMember(member);
+        }
+        log.info("6-----");
+        return "redirect:/preference";
+    }
+    @RequestMapping(value = "/preference", method = RequestMethod.GET)
+    public void preference(){
+
+    }
+    //이메일인증
+    @RequestMapping(value = "/emailConfirm/email/{email}", method = RequestMethod.POST)
+    @ResponseBody
+    public String emailConfirm(@PathVariable String email) throws Exception {
+        return  mService.sendSimpleMessage(email);
+    }
+
+
 }

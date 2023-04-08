@@ -14,4 +14,10 @@ public interface IMemberService {
 
     //닉네임 중복체크
     public int nicknameCheck(String nickname);
+
+    //회원가입
+    public int regiMember(MemberVO member);
+
+    //이메일인증
+    public String sendSimpleMessage(String to) throws Exception;
 }
