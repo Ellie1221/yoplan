@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @Slf4j
-public class RestConOfChaeng {
+public class ControllerOfChaeng {
 
     @Autowired
     IMemberService mService;
@@ -82,14 +82,12 @@ public class RestConOfChaeng {
     @RequestMapping(value = "/identification/id/{id}", method = RequestMethod.GET)
     @ResponseBody
     public int idCheck(@PathVariable String id){
-        int result = mService.idCheck(id);
-        return result;
+        return mService.idCheck(id);
     }
     //닉네임 중복체크
     @RequestMapping(value = "/nickname/nickname/{nickname}", method = RequestMethod.GET)
     @ResponseBody
     public int nicknameCheck(@PathVariable String nickname){
-        int result = mService.nicknameCheck(nickname);
-        return result;
+        return mService.nicknameCheck(nickname);
     }
 }

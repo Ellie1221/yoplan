@@ -91,6 +91,12 @@
             bottom: 50px;
         }
 
+        #profileImg {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+
         input[type='file'] {
             position: relative;
             left: 55px;
@@ -107,7 +113,7 @@
     <form action="" method="post" id="regiMemBox">
         <div class="regiSection" id="profileZone">
             <div id="profilePreView"></div>
-            <input type="file" enctype="multipart/form-data"/>
+            <input type="file" enctype="multipart/form-data" accept="image/*" onchange="setThumbnail(event)"/>
 
         </div>
         <div class="regiSection">
@@ -122,7 +128,7 @@
             <br>
 
             <span class="required">비밀번호</span><br>
-            <input type="password" name="pw" id="pw"/><br>
+            <input type="text" name="pw" id="pw"/><br>
             <div id="pwCondition">
                 <p>* 영문, 숫자, 특수기호를 포함한 8~16자리</p>
                 <p> &nbsp;&nbsp;&nbsp;&nbsp;- 8자이상 </p>
@@ -134,7 +140,11 @@
 
             <span class="required">비밀번호확인</span><br>
             <input type="password" name="pwCheck" id="pwCheck"/>
-            <br><br>
+            <br>
+            <div id="pwCheckCondition">
+
+            </div>
+            <br>
             <span class="required">연락처</span><br>
             <input type="text" name="tel" id="tel"/>
             <div id="telCondition">
@@ -192,23 +202,26 @@
 
 
     //수정중
-    $("#tel").keyup(function (evt) {
-        alert(evt.keyCode);
-        if (!(95<evt.keyCode<106) &&!(47<evt.keyCode<58)) {
-            alert("오류나야해...");
-            $("#tel").val($(this).val().slice(0, -1));
-            $("#telCondition").text("숫자만 입력가능합니다").css("color", "red");
-            return false;
-        } else if ($("#tel").val() === "") {
-            $("#telCondition").text("연락처를 입력해주세요").css("color", "red");
-            return false;
-        } else if ($("#tel").val().length > 11) {
-            $("#tel").val($(this).val().slice(0, -1));
-            $("#telCondition").text("");
+    $("#tel").keyup(function (event) {
+        if(47<event.keyCode<58 || 95<event.keyCode<106){
+            if($("#tel").val().length>11) {
+                let telValue = $("#tel").val();
+                $("#tel").val(telValue.slice(0, telValue.length - 1));
+                return false;
+            }else {
+                return true;
+            }
+
+        }else{
+            $("#telCondition").text("숫자만 입력가능합니다").css("color","red");
             return false;
         }
     });
 
+
+    function isNumeric(input) {
+        return !isNaN(parseFloat(input)) && isFinite(input);
+    }
 
     $("#nickname").keyup(function (evt) {
         let inputVal = $(this).val();
@@ -242,6 +255,102 @@
                     alert("error!")
                 }
             });
+        }
+    });
+
+    function setThumbnail(event) {
+        let reader = new FileReader();
+        reader.onload = function (event) {
+            let img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            img.setAttribute("id", "profileImg");
+            $("#profilePreView").html(img);
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function convertToEnglish(str) {
+        const koToEngMap = {
+            'ㅂ': 'q', 'ㅈ': 'w', 'ㄷ': 'e', 'ㄱ': 'r', 'ㅅ': 't',
+            'ㅛ': 'y', 'ㅕ': 'u', 'ㅑ': 'i', 'ㅐ': 'o', 'ㅔ': 'p',
+            'ㅁ': 'a', 'ㄴ': 's', 'ㅇ': 'd', 'ㄹ': 'f', 'ㅎ': 'g',
+            'ㅗ': 'h', 'ㅓ': 'j', 'ㅏ': 'k', 'ㅣ': 'l', 'ㅋ': 'z',
+            'ㅌ': 'x', 'ㅊ': 'c', 'ㅍ': 'v', 'ㅠ': 'b', 'ㅜ': 'n',
+            'ㅡ': 'm'
+        };
+
+        const convertedStr = str.replace(/[ㄱ-ㅎㅏ-ㅣ]/g, function (match) {
+            return koToEngMap[match] || match;
+        });
+
+        return convertedStr;
+    }
+
+
+    $("#pw").keyup(function (evt) {
+
+        let inputVal = $("#pw").val();
+        let check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        let regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;
+        if (evt.keyCode === 32) {
+            $(this).val("");
+            $(this).focus();
+            return false;
+        } else if (check.test(inputVal)) {
+            $('#pw').val(convertToEnglish(inputVal));
+            return false;
+        }
+
+        //8자 이상인지 확인
+        if(inputVal.length>7){
+            $("#pwCondition p:nth-of-type(2)").css("color","green");
+        }else{
+            $("#pwCondition p:nth-of-type(2)").css("color","gray");
+        }
+        //영문을 포함하는지 확인
+        if(containsLetters(inputVal)){
+            $("#pwCondition p:nth-of-type(3)").css("color","green");
+        }else{
+            $("#pwCondition p:nth-of-type(3)").css("color","gray");
+        }
+        //숫자를 포함하는지 확인
+        if(containsNumbers(inputVal)){
+            $("#pwCondition p:nth-of-type(4)").css("color","green");
+        }else{
+            $("#pwCondition p:nth-of-type(4)").css("color","gray");
+        }
+        //특수문자를 포함하는지 확인
+        if(containsSpecialChars(inputVal)){
+            $("#pwCondition p:nth-of-type(5)").css("color","green");
+        }else{
+            $("#pwCondition p:nth-of-type(5)").css("color","gray");
+        }
+
+
+    });
+
+    function containsLetters(str) {
+        var regex = /[a-zA-Z]/;
+        return regex.test(str);
+    }
+
+    function containsNumbers(str) {
+        var regex = /\d/;
+        return regex.test(str);
+    }
+
+    function containsSpecialChars(str) {
+        var regex = /[!@#$%^&*(),.?":{}|<>]/;
+        return regex.test(str);
+    }
+
+
+    //비밀번호 확인
+    $("#pwCheck").keyup(function (evt){
+        if($(this).val()===$("#pw").val()){
+            $("#pwCheckCondition").text("일치").css("color","green");
+        }else{
+            $("#pwCheckCondition").text("불일치").css("color","red");
         }
     });
 </script>
