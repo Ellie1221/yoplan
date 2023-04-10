@@ -99,19 +99,20 @@ public class ControllerOfChaeng {
 
     //회원가입
     @RequestMapping(value = "/newMember", method = RequestMethod.POST)
-    public String regiMember(MemberVO member, MultipartFile file, HttpServletRequest request, HttpSession session) {
+    public String regiMember(MemberVO member, @RequestParam("profileName") MultipartFile file, HttpServletRequest request, HttpSession session) {
         member.setCategory(" ");
         member.setStatus("on");
         member.setReason(" ");
         log.info(member.toString());
-        if(member.getProfile()==null){
+        if(file.isEmpty()){
             member.setProfile("basicProfile.png");
             mService.regiMember(member);
         }else{
             // 사진을 저장하기
             String path = System.getProperty("user.dir") + "/src/main/resources/static/images";
             log.info("path : " + path);
-            File saveFile = new File(path, member.getProfile());
+            member.setProfile(file.getOriginalFilename());
+            File saveFile = new File(path, file.getOriginalFilename());
             log.info("saveFile : " + saveFile.toString());
             log.info("1-----");
             log.info(file.getName());
@@ -124,7 +125,6 @@ public class ControllerOfChaeng {
                 e.printStackTrace();
             }
             log.info("4-----");
-            member.setProfile(file.getOriginalFilename());
             log.info("5-----");
             mService.regiMember(member);
         }

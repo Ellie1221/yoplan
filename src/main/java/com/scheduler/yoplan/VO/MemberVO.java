@@ -14,6 +14,4 @@ public class MemberVO {
     private String category;
     private String status;
     private String reason;
-
-
 }
