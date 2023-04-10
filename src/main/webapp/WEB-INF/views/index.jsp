@@ -73,7 +73,7 @@
                 <img src="/images/slidetest1.jpg" alt="여행 이미지">
                 <div class="best_text">
                     <h3>여행 제목</h3>
-                    <p>여행 설명 여행 설명여행 설명여행 설명여행 설명여행 설명여행 설명</p
+                    <p>여행 설명 여행 설명여행 설명여행 설명여행 설명여행 설명여행 설명</p>
                     <p>chaeng 님의 여행</p>
 
                 </div>

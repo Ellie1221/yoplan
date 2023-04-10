@@ -150,7 +150,7 @@
     <form action="/newMember" method="post" id="regiMemBox" enctype="multipart/form-data">
         <div class="regiSection" id="profileZone">
             <div id="profilePreView"></div>
-            <input type="file" name="profile" id="profile"  accept="images/*"
+            <input type="file" name="profileName" id="profile"  accept="images/*"
                    onchange="setThumbnail(event)"/><br>
 
             <span class="required" id="inputName">이름</span>

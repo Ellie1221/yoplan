@@ -45,7 +45,7 @@
     <div class="menuBar">
         <span><a href="#">일정계획</a></span>
         <span><a href="#">나의여행</a></span>
-        <span><a href="#">커뮤니티</a></span>
+        <span><a href="boardListView">커뮤니티</a></span>
         <span><a href="#">마이페이지</a></span>
     </div>
 
