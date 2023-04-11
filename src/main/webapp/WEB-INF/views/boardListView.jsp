@@ -9,6 +9,8 @@
 <html>
 <head>
     <title>Yo! Plan 커뮤니티</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         .wrap {
             width: 1000px;
@@ -28,8 +30,22 @@
 <body>
 <%@include file="header.jsp" %>
 <div class="wrap">
-    <div class="regBoard"><a href="regBoard">글쓰기</a></div>
+    <input type="hidden" id="id" value="${sessionScope.logId }">
+    <div class="regBoard">글쓰기</div>
 
 </div>
+
+<script>
+    $(".regBoard").click(function() {
+        const id = document.getElementById("id").value;
+        if (id == "") {
+            if (confirm("로그인이 필요합니다. 로그인 하시겠습니까?")) {
+                window.location.href = "loginForm";
+            }
+        } else {
+            window.location.href = "regBoard";
+        }
+    });
+</script>
 </body>
 </html>

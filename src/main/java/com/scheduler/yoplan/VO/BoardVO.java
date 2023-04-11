@@ -8,6 +8,6 @@ public class BoardVO {
     private  String id;
     private  String planNumber;
     private  String boardNumber;
-    private  String boardContent;
+    private  String boardContents;
     private  String boardRegDate;
 }
