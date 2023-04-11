@@ -35,7 +35,6 @@ public class BoardController {
 
     @PostMapping("/regBoard.do")
     public String regBoardDo(BoardVO board){
-        log.info(board.toString());
         iBoardService.regBoard(board);
 
         return "boardListView";

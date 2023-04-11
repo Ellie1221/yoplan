@@ -70,20 +70,21 @@
 </div>
 
 <script>
+
+    //toastUI 생성
     const editor = new toastui.Editor({
         el: document.querySelector('#editor'),
         previewStyle: 'vertical',
         height: 'auto',
         viewer: true,
         initialValue: ''
-
     });
 
 
     $('#regBtn').on('click', function () {
         console.log(editor.getHTML());
-        document.getElementById('boardNumber').value = parseInt(new Date().getTime(), 10);
-        document.getElementById('boardContents').value = editor.getHTML();
+        document.getElementById('boardNumber').value = parseInt(new Date().getTime(), 10); //보드넘버 생성
+        document.getElementById('boardContents').value = editor.getHTML(); //에디터에 입력된 값 boardContents에 넣기
         document.frm.submit();
     });
 
